@@ -1,0 +1,36 @@
+
+CREATE TABLE famous_person (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT,
+    age INTEGER);
+    
+INSERT INTO famous_person (fullname, age) VALUES ("Jack Nicholson", "83");
+INSERT INTO famous_person (fullname, age) VALUES ("Marlon Brando", "0");
+INSERT INTO famous_person (fullname, age) VALUES ("Robert De Niro", "76");
+INSERT INTO famous_person (fullname, age) VALUES ("Al Pacino", "80");
+INSERT INTO famous_person (fullname, age) VALUES ("Vincent Price", "0");
+
+CREATE table awards (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    total_awards INTEGER);
+    
+INSERT INTO awards (person_id, total_awards) VALUES (1, 13);
+INSERT INTO awards (person_id, total_awards) VALUES (2, 7);
+INSERT INTO awards (person_id, total_awards) VALUES (3, 3);
+INSERT INTO awards (person_id, total_awards) VALUES (4, 7);
+INSERT INTO awards (person_id, total_awards) VALUES (5, 8);
+
+SELECT famous_person.fullname, awards.total_awards, 
+CASE
+    WHEN age > 1 THEN
+    age
+    ELSE
+    "Deceased"
+    END AS "Age"
+FROM famous_person
+JOIN awards
+ON famous_person.id = awards.person_id
+ORDER BY total_awards DESC;
+
+
